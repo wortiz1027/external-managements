@@ -20,8 +20,8 @@ public class FlightQueryController {
 
     private final FlightsServices service;
 
-    @PostMapping(value = "/fligths")
-    public ResponseEntity<CompletableFuture<Response>> all(@RequestBody(required = true) Request data) throws ExecutionException, InterruptedException, UnknownHostException {
+    @PostMapping(value = "/flights")
+    public ResponseEntity<CompletableFuture<Response>> flight(@RequestBody(required = true) Request data) throws ExecutionException, InterruptedException, UnknownHostException {
 
         if (data == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

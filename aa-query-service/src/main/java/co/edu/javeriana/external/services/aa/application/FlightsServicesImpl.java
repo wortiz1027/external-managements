@@ -91,7 +91,6 @@ public class FlightsServicesImpl implements FlightsServices {
             response.setStatus(status);
             return CompletableFuture.completedFuture(response);
         }
-
     }
 
     @Override

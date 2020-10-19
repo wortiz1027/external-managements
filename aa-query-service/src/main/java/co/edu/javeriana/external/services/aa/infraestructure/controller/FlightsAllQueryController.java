@@ -7,10 +7,7 @@ import co.edu.javeriana.external.services.aa.dtos.all.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.UnknownHostException;
 import java.util.concurrent.CompletableFuture;
@@ -23,14 +20,17 @@ public class FlightsAllQueryController {
 
     private final FlightsServices service;
 
-    @GetMapping(value = "/fligths")
-    public ResponseEntity<CompletableFuture<Response>> all(@RequestBody(required = true) Request data) throws ExecutionException, InterruptedException, UnknownHostException {
+    @GetMapping(value = "/flights/{availables}")
+    public ResponseEntity<CompletableFuture<Response>> all(@PathVariable String availables) throws ExecutionException, InterruptedException, UnknownHostException {
 
-        if (data == null)
+        if (availables == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        if (data.getAvailable().isEmpty())
+        if (availables.isEmpty())
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        Request data = new Request();
+        data.setAvailable(availables);
 
         CompletableFuture<Response> rs = service.getAllFlights(data);
 

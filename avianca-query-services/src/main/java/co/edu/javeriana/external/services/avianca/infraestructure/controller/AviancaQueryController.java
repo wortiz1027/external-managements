@@ -18,7 +18,7 @@ public class AviancaQueryController {
 
     private final FlightsServices service;
 
-    @PostMapping("/vuelos")
+    @PostMapping("/flights")
     public ResponseEntity<CompletableFuture<Response>> getFlights(@RequestBody(required = true) Request request) {
 
         if (request == null)
