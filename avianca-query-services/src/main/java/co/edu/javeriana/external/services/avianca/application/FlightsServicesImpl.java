@@ -8,6 +8,7 @@ import co.edu.javeriana.external.services.avianca.domain.StatusEnum;
 import co.edu.javeriana.external.services.avianca.dtos.Status;
 import co.edu.javeriana.external.services.avianca.infraestructure.client.AviancaWsClient;
 import co.edu.javeriana.external.services.avianca.infraestructure.wsdl.model.GetFlightsResponse;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,17 +24,24 @@ public class FlightsServicesImpl implements FlightsServices {
 
 
     @Override
-    public CompletableFuture<Response> getFlights(Request request) {
+    @HystrixCommand(fallbackMethod = "exampleCircuitBreaker")
+    //public CompletableFuture<Response> getFlights(Request request) {
+    public Response getFlights(Request request) {
         Response response = new Response();
         Status status = new Status();
         try {
             GetFlightsResponse rs = this.service.getFlights(request);
 
+            /*if(false){
+                throw new Exception("Exception message");
+            }*/
+
             if (rs == null) {
                 status.setCode(StatusEnum.ERROR.name());
                 status.setDescription("Error! there is an error getting flights informations");
                 response.setStatus(status);
-                return CompletableFuture.completedFuture(response);
+                // return CompletableFuture.completedFuture(response);
+                return response;
             }
 
             List<AvalaibleFlight> returnFlights = new ArrayList<>();
@@ -89,15 +97,31 @@ public class FlightsServicesImpl implements FlightsServices {
             response.setReturnFlights(returnFlights);
             status.setCode(StatusEnum.SUCCESS.name());
             status.setDescription("There are rows availables");
+            response.setStatus(status);
 
-            return CompletableFuture.completedFuture(response);
+            // return CompletableFuture.completedFuture(response);
+            return response;
         } catch(Exception e) {
             e.printStackTrace();
             status.setCode(StatusEnum.ERROR.name());
             status.setDescription(String.format("There is an error getting flights : %s", e.getMessage()));
             response.setStatus(status);
-            return CompletableFuture.completedFuture(response);
+            //return CompletableFuture.completedFuture(response);
+            return response;
         }
 
+    }
+
+    public Response exampleCircuitBreaker(Request request) {
+        Response response = new Response();
+        Status status = new Status();
+        List<AvalaibleFlight> returnFlights = new ArrayList<>();
+        List<AvalaibleFlight> departureFlights = new ArrayList<>();
+        status.setCode(StatusEnum.SUCCESS.name());
+        status.setDescription("Test Circuit Breaker");
+        response.setDepartureFlights(departureFlights);
+        response.setReturnFlights(returnFlights);
+        response.setStatus(status);
+        return response;
     }
 }
