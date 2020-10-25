@@ -7,10 +7,7 @@ import co.edu.javeriana.external.services.cc.dtos.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.UnknownHostException;
 import java.util.concurrent.CompletableFuture;
@@ -23,14 +20,17 @@ public class CreditCardQueryController {
 
     private final CreditCardServices service;
 
-    @PostMapping(value = "/creditCardValidation")
-    public ResponseEntity<CompletableFuture<Response>> creditCardValidation(@RequestBody(required = true) Request data) throws ExecutionException, InterruptedException, UnknownHostException {
+    @GetMapping(value = "/creditCardValidation/{number}")
+    public ResponseEntity<CompletableFuture<Response>> creditCardValidation(@PathVariable String number) throws ExecutionException, InterruptedException, UnknownHostException {
 
-        if (data == null)
+        if (number == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        if (data.getNumber().isEmpty())
+        if (number.isEmpty())
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        Request data = new Request();
+        data.setNumber(number);
 
         CompletableFuture<Response> rs = service.getCreditCardValidation(data);
 
