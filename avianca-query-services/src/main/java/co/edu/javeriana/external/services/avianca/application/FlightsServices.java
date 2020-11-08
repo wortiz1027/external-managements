@@ -7,6 +7,6 @@ import java.util.concurrent.CompletableFuture;
 
 public interface FlightsServices {
 
-    CompletableFuture<Response> getFlights(Request request);
+    Response getFlights(Request request);
 
 }

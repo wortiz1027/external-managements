@@ -24,8 +24,8 @@ public class AviancaQueryController {
         if (request == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        CompletableFuture<Response> rs = service.getFlights(request);
-
+        // CompletableFuture<Response> rs = service.getFlights(request);
+        CompletableFuture<Response> rs = CompletableFuture.completedFuture(service.getFlights(request));
 
         return new ResponseEntity<>(rs, HttpStatus.ACCEPTED);
     }
