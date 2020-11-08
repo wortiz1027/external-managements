@@ -5,12 +5,11 @@ import co.edu.javeriana.external.services.bl.domain.Codes;
 import co.edu.javeriana.external.services.bl.dtos.Request;
 import co.edu.javeriana.external.services.bl.dtos.Response;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.UnknownHostException;
 import java.util.concurrent.CompletableFuture;
@@ -21,16 +20,21 @@ import java.util.concurrent.ExecutionException;
 @RequiredArgsConstructor
 public class JourneyQueryController {
 
-    private JourneyServices service;
+    private static final Logger LOG = LoggerFactory.getLogger(JourneyQueryController.class);
+    private final JourneyServices service;
 
     @PostMapping(value = "/journeys")
     public ResponseEntity<CompletableFuture<Response>> journeys(@RequestBody(required = true) Request data) throws ExecutionException, InterruptedException, UnknownHostException {
 
-        if (data == null)
+        if (data == null) {
+            LOG.error("ERROR PRIMERA VALIDACION");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
-        if (data.getKey().isEmpty())
+        if (data.getKey().isEmpty()){
+            LOG.error("ERROR 2DA VALIDACION");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
         CompletableFuture<Response> rs = this.service.getJourneys(data);
 
