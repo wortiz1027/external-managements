@@ -11,7 +11,7 @@ public class BolivarianoWsClient extends WebServiceGatewaySupport {
 
     private static final Logger LOG = LoggerFactory.getLogger(BolivarianoWsClient.class);
 
-    public GetJourneyResponse getAllFlights(Request rq) {
+    public GetJourneyResponse getAllJourneys(Request rq) {
         GetJourneyRequest request = new GetJourneyRequest();
         request.setKey(rq.getKey());
 

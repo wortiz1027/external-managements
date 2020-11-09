@@ -25,7 +25,7 @@ public class JourneyServicesImpl implements JourneyServices {
         Response response = new Response();
         Status status = new Status();
         try {
-            GetJourneyResponse rs = this.client.getAllFlights(request);
+            GetJourneyResponse rs = this.client.getAllJourneys(request);
 
             if (rs == null) {
                 status.setCode(Codes.ERROR.name());

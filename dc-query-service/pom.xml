@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>co.edu.javeriana.external.services</groupId>
-	<artifactId>bl-query-service</artifactId>
+	<artifactId>dc-query-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>bl-query-service</name>
-	<description>Servicio de virtualizacion soap bolivariano</description>
+	<name>dc-query-service</name>
+	<description>Servicio que virtualiza el consumo de la gestion de habitaciones de hotel</description>
 
 	<!--
         Enterprise informations
@@ -99,6 +99,10 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
@@ -107,10 +111,6 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web-services</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>wsdl4j</groupId>
 			<artifactId>wsdl4j</artifactId>
@@ -142,6 +142,7 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -168,8 +169,7 @@
 	</dependencyManagement>
 
 	<build>
-
-		<finalName>bl-query-service</finalName>
+		<finalName>dc-query-service</finalName>
 
 		<resources>
 			<resource>
@@ -197,10 +197,10 @@
 				<configuration>
 					<schemaLanguage>WSDL</schemaLanguage>
 					<generateDirectory>${project.basedir}/src/main/java</generateDirectory>
-					<generatePackage>co.edu.javeriana.external.services.bl.infraestructure.wsdl.model</generatePackage>
+					<generatePackage>co.edu.javeriana.external.services.dc.infraestructure.ws.xsd</generatePackage>
 					<schemaDirectory>${project.basedir}/src/main/resources/wsdl</schemaDirectory>
 					<schemaIncludes>
-						<include>journeys.wsdl</include>
+						<include>dancarlton.wsdl</include>
 					</schemaIncludes>
 				</configuration>
 			</plugin>
