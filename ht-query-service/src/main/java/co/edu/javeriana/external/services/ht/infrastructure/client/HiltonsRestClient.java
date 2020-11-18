@@ -19,6 +19,7 @@ import java.util.*;
 
 @Service
 public final class HiltonsRestClient implements RestClient {
+
     @Value("${client.host}")
     private String PROXY_SERVER_HOST;
 

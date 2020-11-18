@@ -4,6 +4,10 @@ import co.edu.javeriana.external.services.dc.application.BookingServices;
 import co.edu.javeriana.external.services.dc.domain.Codes;
 import co.edu.javeriana.external.services.dc.dtos.all.Request;
 import co.edu.javeriana.external.services.dc.dtos.all.Response;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,11 +22,19 @@ import java.util.concurrent.ExecutionException;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
+@Api(value="Gestion de habitaciones dan carlton")
 public class BookingsQueryController {
 
     private static final Logger LOG = LoggerFactory.getLogger(BookingsQueryController.class);
     private final BookingServices service;
 
+    @ApiOperation(value = "Consulta informacion y gestion de habitaciones del hotel dan carlton por descripcion", response = Response.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Consulta exitosa de habitaciones"),
+            @ApiResponse(code = 400, message = "Error en los datos de entrada no se envio informacion"),
+            @ApiResponse(code = 404, message = "Error no se encontro informacion de habitaciones"),
+            @ApiResponse(code = 500, message = "Error interno en el servidor, contacte y reporte con el administrador")
+    })
     @GetMapping(value = "/bookings/{text}")
     public ResponseEntity<CompletableFuture<Response>> reservas(@PathVariable(required = true) String text) throws ExecutionException, InterruptedException, UnknownHostException {
 
@@ -51,6 +63,13 @@ public class BookingsQueryController {
         return new ResponseEntity<>(rs, HttpStatus.ACCEPTED);
     }
 
+    @ApiOperation(value = "Consulta informacion y gestion de habitaciones del hotel dan carlton por codigo", response = Response.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Consulta exitosa de la habitacione"),
+            @ApiResponse(code = 400, message = "Error en los datos de entrada no se envio informacion"),
+            @ApiResponse(code = 404, message = "Error no se encontro informacion de la habitacion"),
+            @ApiResponse(code = 500, message = "Error interno en el servidor, contacte y reporte con el administrador")
+    })
     @PostMapping(value = "/bookings/code")
     public ResponseEntity<CompletableFuture<co.edu.javeriana.external.services.dc.dtos.code.Response>> codigo(@RequestBody(required = true) co.edu.javeriana.external.services.dc.dtos.code.Request data) throws ExecutionException, InterruptedException, UnknownHostException {
 

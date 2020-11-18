@@ -1,0 +1,22 @@
+# -------------------------------------------------------------------------------------
+# - DOCKERFILE
+# - AUTOR: Brian Suarez | Eduardo Franco | Jhon Celemin | Wilman Ortiz
+# - FECHA: 11-Noviembre-2020
+# - DESCRIPCION: Docker-compose que permite la creacion del
+# -              contenedor con el servicio de hoteles hilton
+# -------------------------------------------------------------------------------------
+
+version: '3.7'
+services:
+  ht-query-services:
+    image: ht-query-services:latest
+    container_name: ht-query-services
+    hostname: ht-query-services
+    restart: always
+    ports:
+      - 8096:8096
+    networks:
+      - ntw_backend
+networks:
+  ntw_backend:
+    external: true
