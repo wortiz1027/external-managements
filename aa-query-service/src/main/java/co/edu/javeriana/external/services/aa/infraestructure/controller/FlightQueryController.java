@@ -4,6 +4,10 @@ import co.edu.javeriana.external.services.aa.application.FlightsServices;
 import co.edu.javeriana.external.services.aa.domain.Status;
 import co.edu.javeriana.external.services.aa.dtos.flight.Request;
 import co.edu.javeriana.external.services.aa.dtos.flight.Response;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +20,18 @@ import java.util.concurrent.ExecutionException;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
+@Api(value="Gestion de vuelos con el servicio que expone el proveedor american airlines")
 public class FlightQueryController {
 
     private final FlightsServices service;
 
+    @ApiOperation(value = "Consulta detalle de un vuelo de american airline", response = Response.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Consulta exitosa del detalle de un vuelo segun la ciudad"),
+            @ApiResponse(code = 400, message = "Error en los datos de entrada no se envio informacion de la ciudad"),
+            @ApiResponse(code = 404, message = "Error no se encontro informacion del vuelo consultado"),
+            @ApiResponse(code = 500, message = "Error interno en el servidor, contacte y reporte con el administrador")
+    })
     @PostMapping(value = "/flights")
     public ResponseEntity<CompletableFuture<Response>> flight(@RequestBody(required = true) Request data) throws ExecutionException, InterruptedException, UnknownHostException {
 

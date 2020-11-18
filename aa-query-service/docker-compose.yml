@@ -1,0 +1,22 @@
+# -------------------------------------------------------------------------------------
+# - DOCKERFILE
+# - AUTOR: Brian Suarez | Eduardo Franco | Jhon Celemin | Wilman Ortiz
+# - FECHA: 11-Noviembre-2020
+# - DESCRIPCION: Docker-compose que permite la creacion del
+# -              contenedor con el servicio de consulta de vuelos de american airlines
+# -------------------------------------------------------------------------------------
+
+version: '3.7'
+services:
+  aa-query-services:
+    image: aa-query-services:latest
+    container_name: aa-query-services
+    hostname: aa-query-services
+    restart: always
+    ports:
+      - 8085:8085
+    networks:
+      - ntw_backend
+networks:
+  ntw_backend:
+    external: true
