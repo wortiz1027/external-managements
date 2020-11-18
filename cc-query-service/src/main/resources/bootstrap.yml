@@ -3,7 +3,7 @@
 # +-----------------------------------------------------
 spring:
   application:
-    name: cc-query-service
+    name: cc-query-services
 
   cloud:
     config:
