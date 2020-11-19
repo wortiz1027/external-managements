@@ -3,7 +3,7 @@
 # - AUTOR: Brian Suarez | Eduardo Franco | Jhon Celemin | Wilman Ortiz
 # - FECHA: 14-Septiembre-2020
 # - DESCRIPCION: Dockerfile que permite la creacion del
-# -              contenedor con el servicio de booking AA
+# -              contenedor con el servicio pagos
 # -------------------------------------------------------------
 
 # escape=\ (backslash)
@@ -19,7 +19,7 @@ RUN mvn clean package -Dmaven.test.skip=true
 FROM adoptopenjdk:11-jre-hotspot
 
 ENV APP_HOME "/app"
-ENV HTTP_PORT 8080
+ENV HTTP_PORT 8097
 
 # Informacion de la persona que mantiene la imagen
 LABEL org.opencontainers.image.created=$BUILD_DATE \
@@ -45,4 +45,4 @@ WORKDIR $APP_HOME
 
 COPY --from=BUILDER /build/target/paywaoint-query-service.jar ${APP_HOME}
 
-ENTRYPOINT ["java","-jar","/app/paywaoint-query-service.jar"]
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar ${APP_HOME}/paywaoint-query-service.jar"]

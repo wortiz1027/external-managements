@@ -10,12 +10,12 @@ version: '3.7'
 
 services:
   paywoaint-query-service:
-    image: equipo5/paywoaint-query-service
+    image: paywoaint-query-service
     container_name: paywoaint-query-service
     hostname: paywoaint-query-service
     restart: always
     ports:
-      - 8080:8080
+      - 8097:8097
     networks:
       - ntw_backend
     environment:
