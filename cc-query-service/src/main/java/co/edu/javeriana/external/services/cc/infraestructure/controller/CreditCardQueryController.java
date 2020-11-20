@@ -32,7 +32,7 @@ public class CreditCardQueryController {
             @ApiResponse(code = 404, message = "Error no se encontro informacion de la tarjeta de credito reportada"),
             @ApiResponse(code = 500, message = "Error interno en el servidor, contacte y reporte con el administrador")
     })
-    @GetMapping(value = "/creditCardValidation/{number}")
+    @GetMapping(value = "/validation/{number}")
     public ResponseEntity<CompletableFuture<Response>> creditCardValidation(@PathVariable String number) throws ExecutionException, InterruptedException, UnknownHostException {
 
         if (number == null)
