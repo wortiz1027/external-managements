@@ -8,24 +8,84 @@
 
 version: '3.7'
 services:
-  products-command-services:
-    image: products-command-services:latest
-    container_name: products-command-services
-    hostname: products-command-services
+  aa-query-service:
+    image: aa-query-service:latest
+    container_name: aa-query-service
+    hostname: aa-query-service
     restart: always
     ports:
-      - 8081:8081
+      - 8085:8085
     networks:
       - ntw_backend
-  products-query-services:
-    image: products-query-services:latest
-    container_name: products-query-services
-    hostname: products-query-services
+    environment:
+      - AA_HOST=bookings-service
+      - AA_PORT=7070
+  avianca-query-services:
+    image: avianca-query-services:latest
+    container_name: avianca-query-services
+    hostname: avianca-query-services
     restart: always
     ports:
-      - 8082:8082
+      - 8086:8086
     networks:
       - ntw_backend
+  bl-query-service:
+    image: bl-query-service:latest
+    container_name: bl-query-service
+    hostname: bl-query-service
+    restart: always
+    ports:
+      - 8091:8091
+    networks:
+      - ntw_backend
+    environment:
+      - BL_HOST=bolivariano-service
+      - BL_PORT=7071
+  cc-query-services:
+    image: cc-query-services:latest
+    container_name: cc-query-services
+    hostname: cc-query-services
+    restart: always
+    ports:
+      - 8097:8097
+    networks:
+      - ntw_backend
+    environment:
+      - CC_HOST=CreditCard-service
+      - CC_PORT=7071      
+  dc-query-services:
+    image: dc-query-services:latest
+    container_name: dc-query-services
+    hostname: dc-query-services
+    restart: always
+    ports:
+      - 8092:8092
+    networks:
+      - ntw_backend
+    environment:
+      - DC_HOST=dancarlton-service
+      - DC_PORT=7072       
+  ht-query-services:
+    image: ht-query-services:latest
+    container_name: ht-query-services
+    hostname: ht-query-services
+    restart: always
+    ports:
+      - 8096:8096
+    networks:
+      - ntw_backend
+  paywoaint-query-service:
+    image: paywoaint-query-service
+    container_name: paywoaint-query-service
+    hostname: paywoaint-query-service
+    restart: always
+    ports:
+      - 8098:8098
+    networks:
+      - ntw_backend
+    environment:
+      - PAYWOAINT_HOST=paywoaint-service
+      - PAYWOAINT_PORT=7075      
 networks:
   ntw_backend:
     external: true
