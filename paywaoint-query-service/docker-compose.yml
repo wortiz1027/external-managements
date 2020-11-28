@@ -20,7 +20,7 @@ services:
       - ntw_backend
     environment:
       - PAYWOAINT_HOST=paywoaint-service
-      - PAYWOAINT_PORT=7071
+      - PAYWOAINT_PORT=7075
 
 networks:
   ntw_backend:

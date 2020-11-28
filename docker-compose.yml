@@ -9,7 +9,7 @@
 version: '3.7'
 services:
   aa-query-service:
-    image: aa-query-service:latest
+    image: wortiz1027/aa-query-service:latest
     container_name: aa-query-service
     hostname: aa-query-service
     restart: always
@@ -21,7 +21,7 @@ services:
       - AA_HOST=bookings-service
       - AA_PORT=7070
   avianca-query-services:
-    image: avianca-query-services:latest
+    image: wortiz1027/avianca-query-services:latest
     container_name: avianca-query-services
     hostname: avianca-query-services
     restart: always
@@ -30,7 +30,7 @@ services:
     networks:
       - ntw_backend
   bl-query-service:
-    image: bl-query-service:latest
+    image: wortiz1027/bl-query-service:latest
     container_name: bl-query-service
     hostname: bl-query-service
     restart: always
@@ -42,7 +42,7 @@ services:
       - BL_HOST=bolivariano-service
       - BL_PORT=7071
   cc-query-services:
-    image: cc-query-services:latest
+    image: wortiz1027/cc-query-services:latest
     container_name: cc-query-services
     hostname: cc-query-services
     restart: always
@@ -54,7 +54,7 @@ services:
       - CC_HOST=CreditCard-service
       - CC_PORT=7071      
   dc-query-services:
-    image: dc-query-services:latest
+    image: wortiz1027/dc-query-services:latest
     container_name: dc-query-services
     hostname: dc-query-services
     restart: always
@@ -66,7 +66,7 @@ services:
       - DC_HOST=dancarlton-service
       - DC_PORT=7072       
   ht-query-services:
-    image: ht-query-services:latest
+    image: wortiz1027/ht-query-services:latest
     container_name: ht-query-services
     hostname: ht-query-services
     restart: always
@@ -75,7 +75,7 @@ services:
     networks:
       - ntw_backend
   paywoaint-query-service:
-    image: paywoaint-query-service
+    image: wortiz1027/paywoaint-query-service
     container_name: paywoaint-query-service
     hostname: paywoaint-query-service
     restart: always
