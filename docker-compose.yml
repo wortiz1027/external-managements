@@ -97,7 +97,9 @@ services:
     environment:
       - CONFIG_SERVER=http://10.39.1.85:9090
       - EUREKA_SERVER=http://10.39.1.85:9091/eureka
-      - EUREKA_HOST=10.39.1.85  
+      - EUREKA_HOST=10.39.1.85
+      - HT_HOST=10.39.1.59
+      - HT_PORT=80
     networks:
       - ntw_backend
   paywoaint-query-service:
