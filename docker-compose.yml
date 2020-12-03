@@ -103,7 +103,7 @@ services:
     networks:
       - ntw_backend
   paywoaint-query-service:
-    image: wortiz1027/paywoaint-query-service
+    image: wortiz1027/paywoaint-query-service:latest
     container_name: paywoaint-query-service
     hostname: paywoaint-query-service
     restart: always
