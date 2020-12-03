@@ -15,10 +15,14 @@ services:
     restart: always
     ports:
       - 8085:8085
+      - 6085:6085
     networks:
       - ntw_backend
     environment:
-      - AA_HOST=bookings-service
+      - CONFIG_SERVER=http://10.39.1.85:9090
+      - EUREKA_SERVER=http://10.39.1.85:9091/eureka
+      - EUREKA_HOST=10.39.1.85
+      - AA_HOST=10.39.1.130
       - AA_PORT=7070
   avianca-query-services:
     image: wortiz1027/avianca-query-services:latest
@@ -27,6 +31,11 @@ services:
     restart: always
     ports:
       - 8086:8086
+      - 6086:6086
+    environment:
+      - CONFIG_SERVER=http://10.39.1.85:9090
+      - EUREKA_SERVER=http://10.39.1.85:9091/eureka
+      - EUREKA_HOST=10.39.1.85  
     networks:
       - ntw_backend
   bl-query-service:
@@ -36,10 +45,14 @@ services:
     restart: always
     ports:
       - 8091:8091
+      - 6091:6091
     networks:
       - ntw_backend
     environment:
-      - BL_HOST=bolivariano-service
+      - CONFIG_SERVER=http://10.39.1.85:9090
+      - EUREKA_SERVER=http://10.39.1.85:9091/eureka
+      - EUREKA_HOST=10.39.1.85
+      - BL_HOST=10.39.1.130
       - BL_PORT=7071
   cc-query-services:
     image: wortiz1027/cc-query-services:latest
@@ -47,12 +60,16 @@ services:
     hostname: cc-query-services
     restart: always
     ports:
-      - 8097:8097
+      - 8098:8098
+      - 6098:6098
     networks:
       - ntw_backend
     environment:
-      - CC_HOST=CreditCard-service
-      - CC_PORT=7071      
+      - CONFIG_SERVER=http://10.39.1.85:9090
+      - EUREKA_SERVER=http://10.39.1.85:9091/eureka
+      - EUREKA_HOST=10.39.1.85
+      - CC_HOST=creditcard-services
+      - CC_PORT=7000      
   dc-query-services:
     image: wortiz1027/dc-query-services:latest
     container_name: dc-query-services
@@ -60,10 +77,14 @@ services:
     restart: always
     ports:
       - 8092:8092
+      - 6092:6092
     networks:
       - ntw_backend
     environment:
-      - DC_HOST=dancarlton-service
+      - CONFIG_SERVER=http://10.39.1.85:9090
+      - EUREKA_SERVER=http://10.39.1.85:9091/eureka
+      - EUREKA_HOST=10.39.1.85
+      - DC_HOST=10.39.1.130
       - DC_PORT=7072       
   ht-query-services:
     image: wortiz1027/ht-query-services:latest
@@ -72,6 +93,11 @@ services:
     restart: always
     ports:
       - 8096:8096
+      - 6096:6096
+    environment:
+      - CONFIG_SERVER=http://10.39.1.85:9090
+      - EUREKA_SERVER=http://10.39.1.85:9091/eureka
+      - EUREKA_HOST=10.39.1.85  
     networks:
       - ntw_backend
   paywoaint-query-service:
@@ -80,11 +106,15 @@ services:
     hostname: paywoaint-query-service
     restart: always
     ports:
-      - 8098:8098
+      - 8097:8097
+      - 6097:6097
     networks:
       - ntw_backend
     environment:
-      - PAYWOAINT_HOST=paywoaint-service
+      - CONFIG_SERVER=http://10.39.1.85:9090
+      - EUREKA_SERVER=http://10.39.1.85:9091/eureka
+      - EUREKA_HOST=10.39.1.85
+      - PAYWOAINT_HOST=10.39.1.130
       - PAYWOAINT_PORT=7075      
 networks:
   ntw_backend:
