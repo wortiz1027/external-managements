@@ -16,17 +16,22 @@ public class AmericanAirlineWsClient extends WebServiceGatewaySupport {
     public GetAllFlightsResponse getAllFlights(Request rq) {
         GetAllFlightsRequest request = new GetAllFlightsRequest();
         request.setAvailable(rq.getAvailable());
-
+        LOG.debug("REQUEST >> {}", request.getAvailable());
         GetAllFlightsResponse response = (GetAllFlightsResponse) getWebServiceTemplate().marshalSendAndReceive(request);
-        if (response.getHeader() != null) LOG.info("DESCRIPTION: {}", response.getHeader().getDescription());
+
+        LOG.debug("RESPONSE >> {}", response);
+
+        if (response.getHeader() != null) LOG.debug("DESCRIPTION: {}", response.getHeader().getDescription());
         return response;
     }
 
     public GetFlightsResponse getFlight(co.edu.javeriana.external.services.aa.dtos.flight.Request rq) {
         GetFlightsRequest request = new GetFlightsRequest();
         request.setCity(rq.getCity());
-
+        LOG.debug("REQUEST >> {}", request.getCity());
         GetFlightsResponse response = (GetFlightsResponse) getWebServiceTemplate().marshalSendAndReceive(request);
+
+        LOG.debug("RESPONSE >> {}", response);
 
         return response;
     }

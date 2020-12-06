@@ -119,7 +119,7 @@
     </wsdl:binding>
     <wsdl:service name="flightsPortService">
         <wsdl:port binding="tns:flightsPortSoap11" name="flightsPortSoap11">
-            <soap:address location="http://localhost:7070/bookings/ws"/>
+            <soap:address location="http://10.39.1.130:7070/bookings/ws"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

@@ -10,6 +10,8 @@ import co.edu.javeriana.external.services.aa.infraestructure.wsdl.model.GetAllFl
 import co.edu.javeriana.external.services.aa.infraestructure.wsdl.model.GetFlightsResponse;
 import co.edu.javeriana.external.services.aa.infraestructure.wsdl.model.Seat;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +22,8 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class FlightsServicesImpl implements FlightsServices {
 
+    private static Logger LOG = LoggerFactory.getLogger(FlightsServicesImpl.class);
+
     private final AmericanAirlineWsClient service;
 
     @Override
@@ -28,6 +32,7 @@ public class FlightsServicesImpl implements FlightsServices {
         Status status = new Status();
         try {
             GetAllFlightsResponse rs = this.service.getAllFlights(request);
+            LOG.debug("RESPONSE-SOAP: {}", rs.getHeader().getCode());
 
             if (rs == null) {
                 status.setCode(co.edu.javeriana.external.services.aa.domain.Status.ERROR.name());
@@ -99,7 +104,7 @@ public class FlightsServicesImpl implements FlightsServices {
         Status status = new Status();
         try {
             GetFlightsResponse rs = this.service.getFlight(data);
-
+            LOG.debug("RESPONSE-SOAP: {}", rs.getHeader().getCode());
             if (rs == null) {
                 status.setCode(co.edu.javeriana.external.services.aa.domain.Status.ERROR.name());
                 status.setDescription("Error! there is an error getting flights informations");
